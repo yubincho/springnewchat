@@ -2,9 +2,9 @@
 //
 //import com.example.banktest.config.auth.LoginUser;
 //import com.example.banktest.config.jwt.JwtProcess;
-//import com.example.banktest.domain.jwt.RefreshToken;
+//import com.example.banktest.domain.entity.RefreshToken;
 //import com.example.banktest.domain.jwt.RefreshTokenRepository;
-//import com.example.banktest.domain.user.User;
+//import com.example.banktest.domain.entity.User;
 //import com.example.banktest.service.UserService;
 //import lombok.RequiredArgsConstructor;
 //import org.springframework.stereotype.Service;

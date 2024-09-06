@@ -1,6 +1,5 @@
-package com.example.banktest.domain.user;
+package com.example.banktest.domain.entity;
 
-import com.example.banktest.chat.repository.ChatRoom;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,7 +42,7 @@ public class User {
 
     // 채팅방
     @OneToMany(mappedBy = "createdBy")
-    private List<ChatRoom> createdRooms = new ArrayList<>();
+    private List<ChatRoom> createdRooms = new ArrayList<>(); //
 
     @CreatedDate
     @Column(nullable = false)

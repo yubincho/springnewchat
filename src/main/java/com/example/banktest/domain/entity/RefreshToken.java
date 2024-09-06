@@ -1,4 +1,4 @@
-package com.example.banktest.domain.jwt;
+package com.example.banktest.domain.entity;
 
 
 import jakarta.persistence.*;

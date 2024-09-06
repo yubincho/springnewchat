@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Create or Select a Chat Room</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="bg-light">
+<div id="room-selection-page" class="d-flex align-items-center vh-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center mb-4">Select or Create a Chat Room</h1>
+                <form id="room-form">
+                    <input type="text" id="room-name" name="roomName" placeholder="Room Name" class="form-control" required>
+                    <button type="submit" class="btn btn-success mt-2">Join or Create Room</button>
+                </form>
+                <div id="available-rooms" class="mt-4">
+                    <!-- 채팅방 목록을 여기에서 동적으로 로드합니다 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/chat-room.js"></script>
+</body>
+</html>

@@ -1,13 +1,11 @@
 package com.example.banktest.config.auth;
 
-import com.example.banktest.domain.user.User;
+import com.example.banktest.domain.entity.User;
 import com.example.banktest.domain.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;

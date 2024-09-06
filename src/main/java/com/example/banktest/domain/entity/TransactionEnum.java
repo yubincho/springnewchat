@@ -1,4 +1,4 @@
-package com.example.banktest.domain.transaction;
+package com.example.banktest.domain.entity;
 
 
 import lombok.AllArgsConstructor;

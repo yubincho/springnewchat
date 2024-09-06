@@ -5,8 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 import com.example.banktest.config.auth.LoginUser;
-import com.example.banktest.domain.user.User;
-import com.example.banktest.domain.user.UserEnum;
+import com.example.banktest.domain.entity.User;
+import com.example.banktest.domain.entity.UserEnum;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +29,7 @@ public class JwtProcess {
                 .withExpiresAt(new Date(System.currentTimeMillis() + JwtVO.EXPIRATION_TIME))
                 .withClaim("id", loginUser.getUser().getId())
                 .withClaim("role", loginUser.getUser().getRole().name())
+                .withClaim("username", loginUser.getUsername())
                 .sign(Algorithm.HMAC512(JwtVO.SECRET));
         return JwtVO.TOKEN_PREFIX + jwtToken;
     }
@@ -37,13 +38,32 @@ public class JwtProcess {
     // return 되는 LoginUser 객체를 강제로 시큐리티 세션에 직접 주입할 예정
     public static LoginUser verify(String token) {
         log.debug("디버그 : JwtProcess verify()");
-        DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(JwtVO.SECRET)).build().verify(token);
-        System.out.println("[decodedJWT] : " + decodedJWT);
-        Long id = decodedJWT.getClaim("id").asLong();
-        String role = decodedJWT.getClaim("role").asString();
-        User user = User.builder().id(id).role(UserEnum.valueOf(role)).build();
-        LoginUser loginUser = new LoginUser(user);
-        return loginUser;
+        System.out.println("[raw token] : " + token);
+        try {
+            DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(JwtVO.SECRET)).build().verify(token);
+            System.out.println("[decodedJWT] : " + decodedJWT);
+
+            Long id = decodedJWT.getClaim("id").asLong();
+            String role = decodedJWT.getClaim("role").asString();
+            String username = decodedJWT.getClaim("username").asString();
+
+            User user = User.builder()
+                    .id(id)
+                    .role(UserEnum.valueOf(role))
+                    .username(username)
+                    .build();
+
+            System.out.println("[user] : " + user);
+//            LoginUser loginUser = new LoginUser(user);
+            System.out.println("[login user 1] : " + new LoginUser(user));
+            log.debug("디버그 : login user" + new LoginUser(user));
+            System.out.println("[login user 2] : " + new LoginUser(user));
+            return new LoginUser(user);
+        }
+        catch (Exception e) {
+            log.error("JWT 토큰 검증 실패: {}", e.getMessage());
+            throw new RuntimeException("Invalid JWT Token", e);
+        }
     }
 
 
@@ -67,6 +87,7 @@ public class JwtProcess {
                 .withExpiresAt(new Date(System.currentTimeMillis() + JwtVO.REFRESH_TIME))
                 .withClaim("id", loginUser.getUser().getId())
                 .withClaim("role", loginUser.getUser().getRole().name())
+                .withClaim("username", loginUser.getUsername())
                 .sign(Algorithm.HMAC512(JwtVO.SECRET));
         return JwtVO.TOKEN_PREFIX + jwtToken;
     }

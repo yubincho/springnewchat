@@ -4,16 +4,30 @@ let stompClient = null;
 let username = null;
 let chatRoomId = null;
 
+// JWT 토큰 가져오기
+function getJwtToken() {
+    return localStorage.getItem('jwt_token');
+}
+alert(getJwtToken())
+
 // 채팅방에 연결하는 함수
 function connectToRoom(event) {
     event.preventDefault();
     const roomName = $("#room-name").val().trim();
+    const token = getJwtToken();
+
+    if (!token) {
+        alert("로그인이 필요합니다.");
+        window.location.href = '/login';
+        return;
+    }
+
     if (roomName) {
         $.ajax({
-            url: '/api/chatroom',
+            url: '/chat',
             type: 'POST',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('jwt_token')
+                'Authorization': token
             },
             data: JSON.stringify({ name: roomName }),
             contentType: 'application/json',
@@ -34,11 +48,18 @@ function connectToRoom(event) {
 
 // WebSocket에 연결하는 함수
 function connect() {
+    const token = getJwtToken();
+    if (!token) {
+        alert("로그인이 필요합니다.");
+        window.location.href = '/login';
+        return;
+    }
+
     const socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
 
     const headers = {
-        'Authorization': 'Bearer ' + localStorage.getItem('jwt_token')
+        'Authorization': token
     };
 
     stompClient.connect(headers, onConnected, onError);
@@ -96,11 +117,20 @@ function onMessageReceived(payload) {
 
 // 사용 가능한 채팅방을 불러오는 함수
 function loadChatRooms() {
+
+    const token = getJwtToken();
+
+    if (!token) {
+        alert("로그인이 필요합니다.");
+        window.location.href = '/login';
+        return;
+    }
+
     $.ajax({
         url: '/api/chatroom',
         type: 'GET',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('jwt_token')
+            'Authorization': 'Bearer ' + token
         },
         success: function(rooms) {
             const roomList = $('#available-rooms');

@@ -17,8 +17,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import com.example.banktest.config.auth.LoginUser;
+import com.example.banktest.domain.entity.User;
+import com.example.banktest.dto.user.UserRespDto;
 
 
 @Slf4j
@@ -38,8 +45,18 @@ public class UserController {
     }
 
 
-    // 로그인
 
+    @GetMapping("/user/current")
+    public ResponseEntity<UserRespDto.LoginRespDto> getCurrentUser(@AuthenticationPrincipal LoginUser loginUser) {
+        if (loginUser == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        User user = loginUser.getUser();
+        UserRespDto.LoginRespDto responseDto = new UserRespDto.LoginRespDto(user);
+
+        return ResponseEntity.ok(responseDto);
+    }
 
 
 

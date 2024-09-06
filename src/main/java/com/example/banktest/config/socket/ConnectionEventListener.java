@@ -1,8 +1,8 @@
 package com.example.banktest.config.socket;
 
-import com.example.banktest.chat.repository.ChatMessage;
-import com.example.banktest.chat.repository.ChatMessageRepository;
-import com.example.banktest.chat.repository.MessageType;
+import com.example.banktest.domain.entity.ChatMessage;
+import com.example.banktest.domain.chat.ChatMessageRepository;
+import com.example.banktest.domain.entity.MessageType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;

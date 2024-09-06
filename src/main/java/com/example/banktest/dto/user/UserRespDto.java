@@ -1,10 +1,9 @@
 package com.example.banktest.dto.user;
 
-import com.example.banktest.domain.user.User;
+import com.example.banktest.domain.entity.User;
 import com.example.banktest.util.CustomDateUtil;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 
 public class UserRespDto {
@@ -21,6 +20,7 @@ public class UserRespDto {
             this.username = user.getUsername();
             this.createdAt = CustomDateUtil.toStringFormat(user.getCreatedAt());
         }
+
     }
 
     @Setter

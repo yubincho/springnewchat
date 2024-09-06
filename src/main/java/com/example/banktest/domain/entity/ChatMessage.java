@@ -1,5 +1,7 @@
-package com.example.banktest.chat.repository;
+package com.example.banktest.domain.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.redis.core.RedisHash;
 
-import java.util.UUID;
+import java.io.Serializable;
 
 
 @AllArgsConstructor
@@ -15,7 +17,11 @@ import java.util.UUID;
 @Data
 @Builder
 @RedisHash("ChatMessage")
-public class ChatMessage {
+@JsonSerialize
+@JsonDeserialize
+public class ChatMessage implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     private String id;

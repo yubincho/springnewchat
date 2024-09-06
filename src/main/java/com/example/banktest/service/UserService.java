@@ -1,7 +1,7 @@
 package com.example.banktest.service;
 
 
-import com.example.banktest.domain.user.User;
+import com.example.banktest.domain.entity.User;
 import com.example.banktest.domain.user.UserRepository;
 import com.example.banktest.dto.user.UserRespDto;
 import com.example.banktest.dto.user.UserReqDto;

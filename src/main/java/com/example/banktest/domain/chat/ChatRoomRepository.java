@@ -1,5 +1,6 @@
-package com.example.banktest.chat.repository;
+package com.example.banktest.domain.chat;
 
+import com.example.banktest.domain.entity.ChatRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

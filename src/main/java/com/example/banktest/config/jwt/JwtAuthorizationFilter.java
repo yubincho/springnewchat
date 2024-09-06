@@ -42,6 +42,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             String token = header.replace(JwtVO.TOKEN_PREFIX, "");
             try {
                 LoginUser loginUser = jwtProcess.verify(token);
+                log.debug("[login user 3]: " + loginUser );
                 if (loginUser != null && isRefreshTokenValid(loginUser.getUser().getId())) {
                     Authentication authentication = new UsernamePasswordAuthenticationToken(
                             loginUser, null, loginUser.getAuthorities());
@@ -70,6 +71,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
         return path.startsWith("/ws") || path.startsWith("/css") || path.startsWith("/js") || path.startsWith("/images")
-                || path.startsWith("/login") || path.startsWith("/api/join");
+                || path.startsWith("/login") || path.startsWith("/api/login") || path.startsWith("/api/join");
     }
 }

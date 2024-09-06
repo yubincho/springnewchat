@@ -1,7 +1,6 @@
-package com.example.banktest.domain.account;
+package com.example.banktest.domain.entity;
 
 
-import com.example.banktest.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

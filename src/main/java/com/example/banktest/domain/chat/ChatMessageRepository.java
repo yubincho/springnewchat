@@ -1,5 +1,6 @@
-package com.example.banktest.chat.repository;
+package com.example.banktest.domain.chat;
 
+import com.example.banktest.domain.entity.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
@@ -9,10 +10,10 @@ import java.util.UUID;
 @Repository
 public class ChatMessageRepository {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, ChatMessage> redisTemplate;
 
     @Autowired
-    public ChatMessageRepository(RedisTemplate<String, Object> redisTemplate) {
+    public ChatMessageRepository(RedisTemplate<String, ChatMessage> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
@@ -27,5 +28,3 @@ public class ChatMessageRepository {
         return (ChatMessage) redisTemplate.opsForHash().get("ChatMessage", id);
     }
 }
-
-

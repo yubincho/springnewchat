@@ -1,7 +1,7 @@
 package com.example.banktest.dto.user;
 
-import com.example.banktest.domain.user.User;
-import com.example.banktest.domain.user.UserEnum;
+import com.example.banktest.domain.entity.User;
+import com.example.banktest.domain.entity.UserEnum;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

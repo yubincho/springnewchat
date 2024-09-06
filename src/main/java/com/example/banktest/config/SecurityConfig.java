@@ -6,19 +6,13 @@ import com.example.banktest.config.jwt.JwtAuthorizationFilter;
 import com.example.banktest.config.jwt.JwtProcess;
 import com.example.banktest.domain.jwt.RedisRefreshTokenRepository;
 
-import com.example.banktest.domain.user.UserEnum;
-import com.example.banktest.dto.ResponseDto;
 import com.example.banktest.service.jwt_token.RefreshTokenService;
 import com.example.banktest.util.CustomResponseUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,8 +24,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.logging.Logger;
 
 
 @Slf4j
@@ -86,8 +78,8 @@ public class SecurityConfig {
 //                        .anyRequest().authenticated()
 //                )
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/login", "/api/join", "/ws/**", "/css/**", "/js/**", "/favicon.ico").permitAll()
-                        .requestMatchers("/chat").authenticated()
+                        .requestMatchers("/login","/api/login", "/api/join", "/css/**", "/js/**", "/favicon.ico").permitAll()
+                        .requestMatchers("/chat/**", "/ws/**", "/api/chatroom", "/api/user/current").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthenticationFilter, JwtAuthorizationFilter.class);

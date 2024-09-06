@@ -1,4 +1,4 @@
-package com.example.banktest.chat.repository;
+package com.example.banktest.domain.entity;
 
 public enum MessageType {
     CHAT,

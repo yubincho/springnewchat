@@ -1,10 +1,6 @@
 package com.example.banktest.service.jwt_token;
 
 import com.example.banktest.domain.jwt.RedisRefreshTokenRepository;
-import com.example.banktest.domain.jwt.RefreshToken;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
